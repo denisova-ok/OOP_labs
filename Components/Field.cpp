@@ -66,6 +66,7 @@ Field &Field::operator=(const Field &other)
   }
   if (unit_ != nullptr) {
     delete unit_;
+    unit_ = other.unit_;
   }
   height_ = other.height_;
   width_ = other.width_;
@@ -105,14 +106,17 @@ Field &Field::operator=(Field &&other) noexcept {
 Field::~Field()
 {
   delete unit_;
-  for (int i = 0; i < height_; i++) {
+  for (int i = height_ - 1; i >= 0; i--) {
     for (int j = width_ - 1; j >= 0; j--) {
       delete &(*matrix_)[i][j];
+
     }
   }
   for (int i = 0; i < height_; i++) {
-    delete &(*matrix_)[i];
+    matrix_[i].clear();
   }
+
+  //matrix_->erase();
   delete matrix_;
 //  matrix_->clear();
 }
@@ -185,6 +189,7 @@ void Field::moveUnit(Direction dir)
       this->notify(new GameMessage("game over: win\n"));
     }*/
 //  std::cout << "reaction x: " << unit_->getPosition().x << ", reaction y: " << unit_->getPosition().y << std::endl;
+    controller->getViewer()->showField();
   } else {
     this->notify(new ErrorMessage("attempt to enter an impassable cell\n"));
   }
@@ -203,6 +208,11 @@ void Field::addObserver(IObserver *o)
 void Field::notify(Message * message)
 {
   obs->update(message);
+}
+
+void Field::addController(Controller *c)
+{
+  controller = c;
 }
 
 

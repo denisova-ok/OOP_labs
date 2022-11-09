@@ -17,6 +17,7 @@ public:
   void setEvent(Event * event);
   bool getPatency() const;
   const Event * getEvent() const;
+  ~Cell();
 
 private:
   bool patency_;

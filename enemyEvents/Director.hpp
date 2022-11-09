@@ -7,6 +7,7 @@ public:
   Director(enemyEventBuilder * b);
   void setBuilder(enemyEventBuilder * b);
   enemyEvent * make();
+  ~Director();
 private:
   enemyEventBuilder * builder;
 };

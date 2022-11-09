@@ -9,6 +9,7 @@ class Field;
 class Event {
 public:
   virtual void trigger(Field * field) = 0;
+  virtual ~Event() = 0;
 };
 
 #endif //OOP_LAB1_VERSION2_EVENT_HPP

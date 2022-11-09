@@ -51,7 +51,10 @@ void LoggerPool::config()
     this->addLogger(new ConsoleLogger());
   if (loggers_.find("File") != std::string::npos)
     this->addLogger(new FileLogger("logs.txt"));
-  if (levels_.find("Events") != std::string::npos) this->addLevel(new EventLog());
-  if (levels_.find("Game") != std::string::npos) this->addLevel(new GameLog());
-  if (levels_.find("Errors") != std::string::npos) this->addLevel(new ErrorLog());
+  if (levels_.find("Errors") != std::string::npos) this->addLevel(new ErrorLog()); else {
+    if (levels_.find("Events") != std::string::npos)
+      this->addLevel(new EventLog());
+    if (levels_.find("Game") != std::string::npos)
+      this->addLevel(new GameLog());
+  }
 }

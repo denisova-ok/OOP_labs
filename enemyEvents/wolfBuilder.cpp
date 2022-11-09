@@ -12,7 +12,7 @@ wolfBuilder::wolfBuilder()
 
 wolfBuilder::~wolfBuilder()
 {
-  delete ue;
+//  delete ue;
 }
 
 enemyEvent *wolfBuilder::getUnitEvent()

@@ -15,3 +15,6 @@ void Director::setBuilder(enemyEventBuilder * b)
 {
   builder = b;
 }
+
+Director::~Director()
+{}

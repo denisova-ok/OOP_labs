@@ -7,7 +7,6 @@ FieldView::FieldView(Field * field)
 
 FieldView::~FieldView()
 {
-//  delete field;
 }
 
 void FieldView::showField()

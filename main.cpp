@@ -17,28 +17,53 @@
 #include "Logging/FileLogger.hpp"
 #include "Logging/ErrorLog.hpp"
 #include "Logging/EventLog.hpp"
+#include "Components/Game.hpp"
+#include "Controlling/gameOn.hpp"
+#include "Controlling/gameOff.hpp"
+#include "Controlling/moveUp.hpp"
+#include "Controlling/moveDown.hpp"
+#include "Controlling/moveRight.hpp"
+#include "Controlling/moveLeft.hpp"
+#include "Controlling/Multipult.hpp"
+#include "Controlling/Manager.hpp"
+#include "Controlling/ConsoleCommandReader.hpp"
+#include "Components/Controller.hpp"
 
 int main()
 {
+
   Field * f = new Field();
-  FieldView fielder(f);
+  Game * g = new Game(f);
+
+  Multipult * pult = new Multipult(g);
+  Manager *mg = new Manager(pult);
+  mg->manage();
+  ConsoleCommandReader  * reader = new ConsoleCommandReader(pult);
+  f->getUnit()->setHealth(5);
+
   enemyEventBuilder * builder = new wolfBuilder();
   Director * dir = new Director(builder);
   enemyEvent * ev = dir->make();
- // f->getCell(0, 1)->setPatency(false);
-  mapEvent * w = new Merchant();
-  mapEvent * w1 = new wallCollapse();
-  f->getCell(0, 1)->setEvent(ev);
-  f->getCell(0, 2)->setEvent(w);
-  f->getCell(0, 3)->setEvent(w1);
-//  f->getCell(0, 1)->setPatency(false);
+  f->getCell(1, 0)->setEvent(ev);
+
+  FieldView  * fielder = new FieldView(f);
+  Controller * controller = new Controller(fielder);
+  f->addController(controller);
+  controller->getViewer()->showField();
+
+ // f->getCell(1, 0)->setPatency(0);
   LoggerPool * lp = new LoggerPool();
-  f->addObserver(lp);
   lp->config();
-  f->moveUnit(RIGHT);
-  f->moveUnit(RIGHT);
-  f->moveUnit(RIGHT);
-  fielder.showField();
+  f->addObserver(lp);
+  std::cout << f->getCell(1, 1)->getPatency() << std::endl;
+  reader->read();
+  delete dir;
+  delete builder;
+  delete fielder;
   delete lp;
+
+  delete g;
+
+
   return 0;
 }

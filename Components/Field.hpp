@@ -7,6 +7,8 @@
 #include "../Logging/GameMessage.hpp"
 #include "../Logging/ErrorMessage.hpp"
 #include "../Logging/EventMessage.hpp"
+#include "Controller.hpp"
+#include "FieldView.hpp"
 #ifndef OOP_LAB1_VERSION2_FIELD_HPP
 #define OOP_LAB1_VERSION2_FIELD_HPP
 
@@ -25,6 +27,7 @@ public:
   Unit* getUnit();
   void moveUnit(Direction dir);
   void addObserver(IObserver * o) override;
+  void addController(Controller * c);
   void notify(Message * message) override;
   ~Field() override;
 
@@ -34,6 +37,7 @@ private:
   std::vector<std::vector<Cell>> *matrix_;
   Unit * unit_;
   IObserver * obs;
+  Controller * controller;
 };
 
 #endif //OOP_LAB1_VERSION2_FIELD_HPP

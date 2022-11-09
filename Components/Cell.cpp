@@ -16,6 +16,7 @@ void Cell::reaction(Field * field)
 
 void Cell::setEvent(Event *event)
 {
+  delete event_;
   event_ = event;
 }
 
@@ -33,4 +34,11 @@ const Event *Cell::getEvent() const
 void Cell::setPatency(bool p)
 {
   patency_ = p;
+}
+
+Cell::~Cell()
+{
+  if (event_ != nullptr) {
+    delete event_;
+  }
 }
