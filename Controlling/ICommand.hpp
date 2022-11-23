@@ -5,6 +5,7 @@
 class ICommand {
 public:
   virtual void execute() = 0;
+  virtual ~ICommand() = 0;
 };
 
 #endif //OOP_LAB1_VERSION2_ICOMMAND_HPP

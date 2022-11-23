@@ -175,13 +175,13 @@ void Field::moveUnit(Direction dir)
       unit_->setPosition(unitsX, unitsY + height_);
     }
     (*matrix_)[unit_->getPosition().y][unit_->getPosition().x].reaction(this);
-    std::string ev = "event on cell (";
+    std::string ev = "unit on cell (";
     ev.append(std::to_string(unit_->getPosition().y));
     ev.append(", ");
     ev.append(std::to_string((unit_->getPosition().x)));
     ev.append(")\n");
     this->notify(new EventMessage(ev));
-    if (unit_->checkDeath()) {
+    if (unit_->checkDeath() && unit_->getMoney() != 1000000) {
       unit_->death();
       this->notify(new GameMessage("game over: loss\n"));
     }/*

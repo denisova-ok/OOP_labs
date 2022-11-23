@@ -1,30 +1,41 @@
 #include "Game.hpp"
 
-void Game::on()
+Game::Game()
 {
-  condition = 1;
-  std::cout << "game on" << std::endl;
-}
-
-void Game::off()
-{
-  condition = 0;
-  std::cout << "game over" << std::endl;
-}
-
-Game::Game(Field *field)
-{
-  field_ = field;
-  this->on();
+  chooseLevel();
 }
 
 Game::~Game()
 {
-  this->off();
+  delete field_;
 }
 
 Field *Game::getField() const
 {
   return field_;
+}
+
+void Game::chooseLevel()
+{
+  std::cout << "Choose game level: 1 or 2" << std::endl;
+  std::string level;
+  getline(std::cin, level);
+  setLevel(level);
+}
+
+void Game::setLevel(std::string level)
+{
+  switch (atoi(level.c_str()))
+  {
+  case 2:
+    FieldGenerator<WinRule<4, 4>, WolfRule<3>, PatencyRule<6>, unitPositionRule<0, 0>> gen2;
+    field_ = gen2.generate();
+    break;
+  default:
+  case 1:
+    FieldGenerator<WinRule<4, 4>, WolfRule<1>, PatencyRule<4>, unitPositionRule<1, 2>> gen1;
+    field_ = gen1.generate();
+    break;
+  }
 }
 

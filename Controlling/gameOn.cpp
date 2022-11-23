@@ -7,5 +7,4 @@ gameOn::gameOn(Game *game)
 
 void gameOn::execute()
 {
-  game_->on();
 }

@@ -28,42 +28,54 @@
 #include "Controlling/Manager.hpp"
 #include "Controlling/ConsoleCommandReader.hpp"
 #include "Components/Controller.hpp"
+#include "generate/FieldGenerator.hpp"
+#include "generate/WolfRule.hpp"
+#include "generate/MerchantRule.hpp"
+#include "generate/PatencyRule.hpp"
+#include "generate/WinRule.hpp"
+#include "generate/MoneyRule.hpp"
+#include "generate/unitPositionRule.hpp"
 
 int main()
 {
 
-  Field * f = new Field();
-  Game * g = new Game(f);
+//  Field * f = new Field();
+//  FieldGenerator<PatencyRule<4>,MoneyRule<30, 4>,  WinRule<4, 4>, unitPositionRule<1, 2>> gen;
 
-  Multipult * pult = new Multipult(g);
-  Manager *mg = new Manager(pult);
-  mg->manage();
-  ConsoleCommandReader  * reader = new ConsoleCommandReader(pult);
-  f->getUnit()->setHealth(5);
+//  Field * f = gen.generate();
+  Game * g = new Game();
 
-  enemyEventBuilder * builder = new wolfBuilder();
-  Director * dir = new Director(builder);
-  enemyEvent * ev = dir->make();
-  f->getCell(1, 0)->setEvent(ev);
 
-  FieldView  * fielder = new FieldView(f);
+  g->getField()->getUnit()->setHealth(5);
+
+//  enemyEventBuilder * builder = new wolfBuilder();
+//  Director * dir = new Director(builder);
+//  enemyEvent * ev = dir->make();
+//  f->getCell(1, 0)->setEvent(ev);
+
+  FieldView  * fielder = new FieldView(g->getField());
   Controller * controller = new Controller(fielder);
-  f->addController(controller);
-  controller->getViewer()->showField();
+  g->getField()->addController(controller);
 
  // f->getCell(1, 0)->setPatency(0);
   LoggerPool * lp = new LoggerPool();
   lp->config();
-  f->addObserver(lp);
-  std::cout << f->getCell(1, 1)->getPatency() << std::endl;
+  g->getField()->addObserver(lp);
+  Multipult * pult = new Multipult(g);
+  Manager *mg = new Manager(pult);
+  mg->manage();
+  CommandReader  * reader = new ConsoleCommandReader(pult);
+  //std::cout << f->getCell(1, 1)->getPatency() << std::endl;
+  controller->getViewer()->showField();
   reader->read();
-  delete dir;
-  delete builder;
+// delete dir;
+ // delete builder;
+
   delete fielder;
   delete lp;
-
-  delete g;
-
-
+  delete mg;
+  delete controller;
+  delete pult;
+  delete reader;
   return 0;
 }

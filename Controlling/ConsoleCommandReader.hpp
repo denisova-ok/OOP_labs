@@ -7,6 +7,7 @@ class ConsoleCommandReader: public CommandReader {
 public:
   ConsoleCommandReader(Multipult * mp);
   void read() override;
+  ~ConsoleCommandReader() override;
 private:
   Multipult * pult_;
 };

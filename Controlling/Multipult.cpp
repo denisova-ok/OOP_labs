@@ -28,3 +28,10 @@ Game *Multipult::getGame() const
   return game_;
 }
 
+Multipult::~Multipult()
+{
+  for (auto command: commands) {
+    delete command.second;
+  }
+}
+

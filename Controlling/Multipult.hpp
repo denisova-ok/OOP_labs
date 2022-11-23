@@ -19,7 +19,7 @@ public:
   Multipult(Game * game);
   void pressOn(char button);
   Game * getGame() const;
-
+  ~Multipult();
 private:
   Game * game_;
   std::map<cmds, ICommand*> commands;

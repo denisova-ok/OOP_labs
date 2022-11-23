@@ -7,7 +7,6 @@ thiefBuilder::thiefBuilder()
 
 thiefBuilder::~thiefBuilder()
 {
-  delete ue;
 }
 
 enemyEvent *thiefBuilder::getUnitEvent()

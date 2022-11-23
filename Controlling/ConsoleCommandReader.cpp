@@ -13,3 +13,6 @@ void ConsoleCommandReader::read()
     pult_->pressOn(command);
   }
 }
+
+ConsoleCommandReader::~ConsoleCommandReader()
+{}

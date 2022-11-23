@@ -16,7 +16,9 @@ void Cell::reaction(Field * field)
 
 void Cell::setEvent(Event *event)
 {
-  delete event_;
+  if (event_ != nullptr) {
+    delete event_;
+  }
   event_ = event;
 }
 

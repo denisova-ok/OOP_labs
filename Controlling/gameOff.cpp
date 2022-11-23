@@ -7,5 +7,4 @@ gameOff::gameOff(Game *game)
 
 void gameOff::execute()
 {
-  game_->off();
 }

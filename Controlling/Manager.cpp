@@ -7,7 +7,7 @@ Manager::Manager(Multipult *mp)
 
 void Manager::manage()
 {
-  std::ifstream in("C://Users/Olya/CLionProjects/oop_lab1_version2/operations.txt"); // окрываем файл для чтения
+  std::ifstream in("./operations.txt"); // окрываем файл для чтения
   int result = 0;
   if (in.is_open())
   {
@@ -27,6 +27,7 @@ void Manager::manage()
     mp_->setKey(commands[3], MOVEDOWN);
     mp_->setKey(commands[4], MOVELEFT);
     mp_->setKey(commands[5], MOVERIGHT);
+    mp_->getGame()->getField()->notify(new GameMessage("file control is set\n"));
   } else {
     mp_->setKey('b', GAMEON);
     mp_->setKey('e', GAMEOFF);
@@ -34,5 +35,9 @@ void Manager::manage()
     mp_->setKey('s', MOVEDOWN);
     mp_->setKey('a', MOVELEFT);
     mp_->setKey('d', MOVERIGHT);
+    mp_->getGame()->getField()->notify(new GameMessage("the default control is set: press 'w' to move up, 'a' to move left, 's' to move down, 'd' to move right\n"));
   }
 }
+
+Manager::~Manager()
+{}
