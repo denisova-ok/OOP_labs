@@ -11,6 +11,9 @@ Field::Field(): height_(5), width_(5), unit_(new Unit())
       (*matrix_)[i].emplace_back(*new Cell());
     }
   }
+  imp_cell_count = 0;
+  events = 0;
+  isWin = 0;
 }
 
 Field::Field(int &width, int &height, Unit  &unit, std::vector<std::vector<Cell>> &mt):
@@ -213,6 +216,36 @@ void Field::notify(Message * message)
 void Field::addController(Controller *c)
 {
   controller = c;
+}
+
+int Field::getImpCount() const
+{
+  return imp_cell_count;
+}
+
+int Field::getEventsCount() const
+{
+  return events;
+}
+
+void Field::changeImpCount(int n)
+{
+  imp_cell_count += n;
+}
+
+void Field::changeEventsCount(int n)
+{
+  events += n;
+}
+
+bool Field::getWin() const
+{
+  return isWin;
+}
+
+void Field::setWin(bool state)
+{
+  isWin = state;
 }
 
 

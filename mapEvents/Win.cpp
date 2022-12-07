@@ -7,9 +7,7 @@ void Win::trigger(Field *field)
 
 void Win::changeField(Field *field)
 {
-  if ((field->getUnit()->getHealth() > 0) &&
-  (field->getUnit()->getPosition().x == field->getWidth() - 1)
-  && (field->getUnit()->getPosition().y == field->getHeight() - 1)) {
+  if (field->getUnit()->getHealth() > 0) {
     field->getUnit()->setHealth(0);
     field->getUnit()->setPower(100);
     field->getUnit()->setMoney(1000000);

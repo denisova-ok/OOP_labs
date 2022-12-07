@@ -10,8 +10,8 @@
 #include "../generate/PatencyRule.hpp"
 #include "../generate/MoneyRule.hpp"
 #include "../generate/WinRule.hpp"
-#include "../generate/WolfRule.hpp"
 #include "../generate/unitPositionRule.hpp"
+#include "../generate/NPCRule.hpp"
 #ifndef OOP_LAB1_VERSION2_GAME_HPP
 #define OOP_LAB1_VERSION2_GAME_HPP
 
@@ -23,6 +23,7 @@ public:
   ~Game();
 private:
   void setLevel(std::string level);
+  void checkWin();
   Field * field_;
 
 };

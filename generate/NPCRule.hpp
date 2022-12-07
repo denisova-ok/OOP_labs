@@ -1,18 +1,21 @@
-#include <ctime>
 #include <random>
+#include <ctime>
+#include "../mapEvents/Wolf.hpp"
+#include "../mapEvents/Merchant.hpp"
 #include "../Components/Field.hpp"
-#include "../mapEvents/Money.hpp"
-#ifndef OOP_LAB1_VERSION2_MONEYRULE_HPP
-#define OOP_LAB1_VERSION2_MONEYRULE_HPP
+#ifndef OOP_LAB1_VERSION2_NPCRULE_HPP
+#define OOP_LAB1_VERSION2_NPCRULE_HPP
 
-template <size_t money_count, size_t count>
-class MoneyRule {
+enum evs {WOLF, MERCHANT};
+
+template <evs name, size_t count>
+class NPCRule {
 public:
   void fill(Field * field);
 };
 
-template<size_t money_count, size_t count>
-void MoneyRule<money_count, count>::fill(Field *field)
+template<evs name, size_t count>
+void NPCRule<name, count>::fill(Field *field)
 {
   int cells = field->getHeight() * field->getWidth();
   int available_cells = cells - field->getEventsCount();
@@ -28,10 +31,26 @@ void MoneyRule<money_count, count>::fill(Field *field)
       i = engine() % field->getHeight();
       j = engine() % field->getWidth();
     }
-    Money * money = new Money(money_count);
-    field->getCell(i, j)->setEvent(money);
+    mapEvent * ev = nullptr;
+    switch (name) {
+    case WOLF: {
+      ev = new Wolf();
+      break;
+      }
+    case MERCHANT: {
+      ev = new Merchant();
+      break;
+      }
+      default: {
+        break;
+      }
+    }
+
+  if (ev) {
+    field->getCell(i, j)->setEvent(ev);
     field->changeEventsCount(1);
+    }
   }
 }
 
-#endif //OOP_LAB1_VERSION2_MONEYRULE_HPP
+#endif //OOP_LAB1_VERSION2_NPCRULE_HPP

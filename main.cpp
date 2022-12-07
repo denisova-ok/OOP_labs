@@ -29,8 +29,6 @@
 #include "Controlling/ConsoleCommandReader.hpp"
 #include "Components/Controller.hpp"
 #include "generate/FieldGenerator.hpp"
-#include "generate/WolfRule.hpp"
-#include "generate/MerchantRule.hpp"
 #include "generate/PatencyRule.hpp"
 #include "generate/WinRule.hpp"
 #include "generate/MoneyRule.hpp"

@@ -12,7 +12,11 @@ public:
 template<size_t i, size_t j>
 void unitPositionRule<i, j>::fill(Field *field)
 {
-  field->getUnit()->setPosition(j % field->getWidth(), i % field->getHeight());
+  if (i == 0 || j == field->getWidth() - 1) {
+    field->getUnit()->setPosition(j % field->getWidth(), i % field->getHeight());
+  } else {
+    field->getUnit()->setPosition(0,0);
+  }
 }
 
 #endif //OOP_LAB1_VERSION2_UNITPOSITIONRULE_HPP

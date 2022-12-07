@@ -25,6 +25,12 @@ public:
   int getHeight() const;
   int getWidth() const;
   Unit* getUnit();
+  int getImpCount() const;
+  int getEventsCount() const;
+  bool getWin() const;
+  void setWin(bool state);
+  void changeImpCount(int n);
+  void changeEventsCount(int n);
   void moveUnit(Direction dir);
   void addObserver(IObserver * o) override;
   void addController(Controller * c);
@@ -38,6 +44,9 @@ private:
   Unit * unit_;
   IObserver * obs;
   Controller * controller;
+  int imp_cell_count;
+  int events;
+  bool isWin;
 };
 
 #endif //OOP_LAB1_VERSION2_FIELD_HPP
